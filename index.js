@@ -7,6 +7,7 @@ $(".btn").click(function () {
 
     userClickedPattern.push(userChosenColor);
     playSound(userChosenColor);
+    animatePress(userChosenColor);
 });
 
 function nextSequence() {
@@ -25,6 +26,16 @@ function nextSequence() {
 function playSound(name) {
     var audio = new Audio("sounds/" + name + ".mp3");
     audio.play();
+}
+
+function animatePress(currentColor) {
+    $("#" + currentColor)
+        .addClass("pressed")
+        .dequeue()
+        .delay(100)
+        .queue(function () {
+            $("#" + currentColor).removeClass("pressed");
+        });
 }
 
 nextSequence();
